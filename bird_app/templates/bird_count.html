@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html>
+  <head>
+    <meta name="viewport" content"width=device-width, initial-scale=1">
+    <title>Bird Sightings</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <header class="navbar navbar-static-top" role="banner">
+      <div class="container">
+      <h1>Daily Bird Sightings</h1>
+      </div>
+    </header>
+    <div class="container">
+      <h2>{{date}}</h2>
+      <h2>within {{miles}}  miles of {{user_city}}, {{user_state}} ({{lat}}, {{long}})</h2>
+    </div>
+    <div class="container">
+      <!-- Lists sightings or Message if no sightings yet -->
+      {% if bird_names: %}
+        <ul>
+        {% for name in bird_names %}
+          <li>{{name}}: {{bird_counts[name]}}</li>
+        {% endfor %}
+        </ul>
+      {% else %}
+        <p>Sorry, no sightings reported yet for your location</p>
+      {% endif %}
+    </div>
+  </body>
+</html>

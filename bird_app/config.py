@@ -1,0 +1,2 @@
+GEOIP_FILEPATH = 'GeoLiteCity.dat'
+GEOIP_CACHE = 'STANDARD'
