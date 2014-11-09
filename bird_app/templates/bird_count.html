@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <html>
   <head>
     <meta name="viewport" content"width=device-width, initial-scale=1">
@@ -8,21 +7,27 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
-    <header class="navbar navbar-static-top" role="banner">
+    <div class="page-header">
       <div class="container">
-      <h1>Daily Bird Sightings</h1>
+      <h1>Daily Birds</h1>
       </div>
-    </header>
-    <div class="container">
-      <h2>{{date}}</h2>
-      <h2>within {{miles}}  miles of {{user_city}}, {{user_state}} ({{lat}}, {{long}})</h2>
     </div>
+    <div class="jumbotron">
+      <div class="container">
+        <h3>Sightings within {{miles}}  miles of {{user_city}}, {{user_state}} ({{lat}}, {{long}})</h3>
+        <h3>{{date}}</h3> 
+      </div>
+    </div> 
     <div class="container">
       <!-- Lists sightings or Message if no sightings yet -->
       {% if bird_names: %}
         <ul>
         {% for name in bird_names %}
-          <li>{{name}}: {{bird_counts[name]}}</li>
+          {% if name in notable_sightings %}
+            <li class="bg-success">{{name}}: {{bird_counts[name]}}</li>
+          {% else %}
+            <li>{{name}}: {{bird_counts[name]}}</li>
+          {% endif %}
         {% endfor %}
         </ul>
       {% else %}
