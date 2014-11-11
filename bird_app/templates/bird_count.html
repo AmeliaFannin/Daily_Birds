@@ -5,6 +5,9 @@
     <meta name="viewport" content"width=device-width, initial-scale=1">
     <title>Bird Sightings</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css' rel='stylesheet' />
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='css/maps.css') }}"/>
   </head>
   <body>
     <div class="page-header">
@@ -14,25 +17,33 @@
     </div>
     <div class="jumbotron">
       <div class="container">
-        <h3>Sightings within {{miles}}  miles of {{user_city}}, {{user_state}} ({{lat}}, {{long}})</h3>
+        <h3>Sightings within {{miles}}  miles of {{user_city}}, {{user_state}} ({{lat}}, {{lon}})</h3>
         <h3>{{date}}</h3> 
       </div>
     </div> 
+    <div id="content" class="container">
+      {% block content %}{{content | safe }}{% endblock %}
+    </div>
+    <!-- if there are notable sightings, displays map and markers -->
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'></script>
     <div class="container">
-      <!-- Lists sightings or Message if no sightings yet -->
-      {% if bird_names: %}
-        <ul>
-        {% for name in bird_names %}
-          {% if name in notable_sightings %}
-            <li class="bg-success">{{name}}: {{bird_counts[name]}}</li>
-          {% else %}
-            <li>{{name}}: {{bird_counts[name]}}</li>
-          {% endif %}
-        {% endfor %}
-        </ul>
-      {% else %}
-        <p>Sorry, no sightings reported yet for your location</p>
-      {% endif %}
+      <!-- {% if notable_sightings: %} -->
+        <div id="map"></div>
+        <script>
+          L.mapbox.accessToken = 'pk.eyJ1IjoiYW1lbGlhZiIsImEiOiI5OEtpVlZFIn0.81iIjFOqtIlhizjG27i0aw';
+
+          var map = L.mapbox.map('map', 'ameliaf.k6al1pfj')
+            .setView({{coordinates|safe}}, 13);
+          
+          var notable_sightings = {{notable_sightings|safe}};
+
+          for(var bird in notable_sightings) {
+            var marker = L.marker([notable_sightings[bird][1],notable_sightings[bird][2]]).addTo(map);
+
+            marker.bindPopup(bird + ', ' + 'Location:' + ' ' + notable_sightings[bird][0]).openPopup();
+          }
+        </script>
+      <!-- {% endif %} -->
     </div>
   </body>
 </html>

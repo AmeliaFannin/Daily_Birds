@@ -1,0 +1,18 @@
+{% extends "bird_count.html" %}
+{% block content %}
+  {{ super() }}
+  <!-- Lists sightings or Message if no sightings yet -->
+    {% if bird_names: %}
+      <ul>
+        {% for name in bird_names: %}
+          {% if name in notable_sightings: %}
+            <li class="bg-success">{{name}}: {{bird_counts[name]}}</li>
+          {% else: %}
+            <li>{{name}}: {{bird_counts[name]}}</li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    {% else: %}
+      <p>Sorry, no sightings reported yet for your location</p>
+    {% endif %}
+{% endblock %}
