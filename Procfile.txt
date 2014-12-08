@@ -1,1 +1,2 @@
+web: gunicorn server.py --log-file - 
 init: python server.py
