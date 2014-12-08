@@ -1,1 +1,1 @@
-web: gunicorn server:app --worker $WEB_CONCURRENCY
+web: gunicorn server:app --preload
