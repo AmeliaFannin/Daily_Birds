@@ -1,2 +1,1 @@
-web: gunicorn server.py --log-file - 
-init: python server.py
+web: gunicorn bird_app:app --log-file - 
