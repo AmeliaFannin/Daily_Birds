@@ -1,1 +1,1 @@
-web: gunicorn -b 0.0.0.0:$PORT bird_app:app
+web: gunicorn server:app
