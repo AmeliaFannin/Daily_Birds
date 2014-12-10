@@ -28,8 +28,8 @@ def index():
 
 # uses ip address and GeoIP to get user location info
 def get_user_location():
-    # user_ip = request.remote_addr
-    user_ip = '50.133.222.179'
+    user_ip = request.remote_addr
+    # user_ip = '50.133.222.179'
     
     # subs in default ip address when running in localhost
     # if user_ip == '127.0.0.1':
