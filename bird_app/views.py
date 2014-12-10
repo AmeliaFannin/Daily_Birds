@@ -6,7 +6,7 @@ import requests
 import json
 import time
 
-gi = GeoIP(app)
+gi = GeoIp(app)
 
 @app.route('/')
 def index():
@@ -28,8 +28,9 @@ def index():
 
 # uses ip address and GeoIP to get user location info
 def get_user_location():
-    user_ip = request.remote_addr
-
+    # user_ip = request.remote_addr
+    user_ip = '50.133.222.179'
+    
     # subs in default ip address when running in localhost
     # if user_ip == '127.0.0.1':
     #     user_ip = '50.133.222.179'
