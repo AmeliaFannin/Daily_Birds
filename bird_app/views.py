@@ -31,8 +31,8 @@ def get_user_location():
     user_ip = request.remote_addr
 
     # subs in default ip address when running in localhost
-    if user_ip == '127.0.0.1':
-        user_ip = '50.133.222.179'
+    # if user_ip == '127.0.0.1':
+    #     user_ip = '50.133.222.179'
         # for different sample, Miami, Fl
         # user_ip = '131.94.186.10'
 
