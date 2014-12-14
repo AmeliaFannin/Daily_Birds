@@ -1,2 +1,2 @@
-# from bird_app import app
-# app.run(debug=True)
+from bird_app import app
+app.run(debug=True)
